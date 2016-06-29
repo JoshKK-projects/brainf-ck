@@ -15,7 +15,7 @@ function interpret(instructions,input){
 	//The tape
 	var tape = new Array();
 	//fill it with 0's
-	var tape_length = 1000;
+	var tape_length = 100000;
 	for (var i=0;i<tape_length;i++){
 		tape[i] = 0;
 	}
@@ -79,7 +79,10 @@ function interpret(instructions,input){
 					break;
 				}
 				else{
-					return("Error: Cannot store negative value on tape");
+					tape[tapePointer] = 255;
+					console.log("Tape at "+tapePointer+ " value decremented to "+tape[tapePointer]);
+					instructionPointer++;
+					break;
 				}
 			case '.':
 				outputStream+=String.fromCharCode(tape[tapePointer]);
@@ -88,6 +91,9 @@ function interpret(instructions,input){
 				instructionPointer++;
 				break;
 			case ',':
+				console.log(input_array);
+				console.log(inputPointer);
+				console.log(input_array[inputPointer]);
 				console.log("read in "+input_array[inputPointer] + " as "+ input_array[inputPointer].charCodeAt(0))
 				tape[tapePointer] = input_array[inputPointer].charCodeAt(0);//error catching for to many reads
 				instructionPointer++;
